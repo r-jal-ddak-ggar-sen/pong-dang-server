@@ -17,6 +17,6 @@ public class SwaggerConfig {
         server.setUrl("https://pongdang.ml");
         Server localhostServer = new Server();
         localhostServer.setUrl("http://localhost:8080");
-        return new OpenAPI().servers(List.of(server, localhostServer));
+        return new OpenAPI().servers(List.of(localhostServer, server));
     }
 }
