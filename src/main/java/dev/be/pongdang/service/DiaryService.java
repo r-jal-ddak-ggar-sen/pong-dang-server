@@ -33,6 +33,7 @@ public class DiaryService {
                               .pond(pond)
                               .member(member)
                               .build();
+        newDiary.addDiary(pond);
         diaryRepository.save(newDiary);
     }
 }

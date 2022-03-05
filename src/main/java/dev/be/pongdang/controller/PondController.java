@@ -15,6 +15,8 @@ import dev.be.pongdang.domain.pond.PondCreateResult.PondRequest;
 import dev.be.pongdang.domain.pond.PondCreateResult.PondResponse;
 import dev.be.pongdang.domain.pond.PondDTO;
 import dev.be.pongdang.domain.pond.PondSearchDTO;
+import dev.be.pongdang.domain.pond.PondSearchDiaryDTO;
+import dev.be.pongdang.domain.pond.PondSearchDiaryResult.PondSearchDiaryResponse;
 import dev.be.pongdang.domain.pond.PondSearchResult.Ponds;
 import dev.be.pongdang.service.PondService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -54,4 +56,18 @@ public class PondController {
         List<Ponds> myPondList = pondService.searchMyPondList(pondSearchDTO);
         return new CommonResponse<>(myPondList);
     }
+
+    @Operation(summary = "연못에 속해있는 일기 리스트 조회")
+    @GetMapping("/diarys")
+    public CommonResponse searchDiaryList(@RequestParam(name = "mid") String mid,
+                                          @RequestParam(name = "pond_id") Long pondId) {
+        PondSearchDiaryDTO dto = PondSearchDiaryDTO.builder()
+                                                   .mid(mid)
+                                                   .pondId(pondId)
+                                                   .build();
+
+        PondSearchDiaryResponse response = pondService.searchDiaryListInPond(dto);
+        return new CommonResponse<>(response);
+    }
+
 }

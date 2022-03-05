@@ -45,4 +45,8 @@ public class Diary extends BaseEntity {
     @JoinColumn(name = "pond_id")
     private Pond pond;
 
+    public void addDiary(Pond pond) {
+        pond.getDiaryList().add(this);
+    }
+
 }

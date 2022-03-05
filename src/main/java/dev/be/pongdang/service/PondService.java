@@ -1,15 +1,22 @@
 package dev.be.pongdang.service;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import dev.be.pongdang.common.enums.response.ReturnCode;
+import dev.be.pongdang.common.exception.CustomException;
 import dev.be.pongdang.domain.pond.PondCreateDTO;
 import dev.be.pongdang.domain.pond.PondDTO;
 import dev.be.pongdang.domain.pond.PondSearchDTO;
+import dev.be.pongdang.domain.pond.PondSearchDiaryDTO;
+import dev.be.pongdang.domain.pond.PondSearchDiaryResult.Diarys;
+import dev.be.pongdang.domain.pond.PondSearchDiaryResult.PondSearchDiaryResponse;
 import dev.be.pongdang.domain.pond.PondSearchResult.Ponds;
+import dev.be.pongdang.entity.Diary;
 import dev.be.pongdang.entity.Member;
 import dev.be.pongdang.entity.MemberPond;
 import dev.be.pongdang.entity.Pond;
@@ -47,6 +54,35 @@ public class PondService {
         });
 
         return pondsList;
+    }
+
+    public PondSearchDiaryResponse searchDiaryListInPond(PondSearchDiaryDTO dto) {
+        List<Ponds> pondsList = new ArrayList<>();
+
+        Member member = memberService.getMember(dto.getMid());
+
+        Pond pond = pondRepository.findById(dto.getPondId()).orElseThrow(() -> {
+            throw new CustomException(ReturnCode.NOT_EXIST, "요청한 연못이 존재하지 않습니다.");
+        });
+
+        List<Diary> diaryEntityList = pond.getDiaryList();
+
+        List<Diarys> diaryList = new ArrayList<>();
+
+        diaryEntityList.stream().forEach(i -> {
+
+            diaryList.add(Diarys.builder()
+                                .mood(i.getMood())
+                                .content(i.getContent())
+                                .writerMid(i.getMember().getMid())
+                                .createdDate(
+                                        i.getCreatedDate().format(DateTimeFormatter.ofPattern("yyyy.MM.dd")))
+                                .build());
+        });
+
+        return PondSearchDiaryResponse.builder()
+                                      .diaryList(diaryList)
+                                      .build();
     }
 
     public PondCreateDTO createPond(PondDTO pondDTO) {
