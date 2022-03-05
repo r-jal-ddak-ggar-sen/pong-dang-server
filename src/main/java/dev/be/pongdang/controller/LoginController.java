@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 import dev.be.pongdang.common.enums.response.ReturnCode;
 import dev.be.pongdang.common.response.CommonResponse;
 import dev.be.pongdang.domain.login.LoginDTO;
+import dev.be.pongdang.domain.login.LoginDupNickNameDTO;
+import dev.be.pongdang.domain.login.LoginDupNickNameResult.LoginDupNickNameRequest;
+import dev.be.pongdang.domain.login.LoginDupNickNameResult.LoginDupNickNameResponse;
 import dev.be.pongdang.domain.login.LoginResult.LoginResponse;
 import dev.be.pongdang.domain.login.LoginResult.MemberRequest;
 import dev.be.pongdang.domain.member.MemberDTO;
@@ -49,5 +52,17 @@ public class LoginController {
         }
 
         return loginResponse;
+    }
+
+    @Operation(summary = "닉네임 중복 체크")
+    @PostMapping("/check/dup/nickname")
+    public CommonResponse checkNickNameDuplicate(@RequestBody LoginDupNickNameRequest request) {
+        LoginDupNickNameDTO dto = LoginDupNickNameDTO.builder()
+                                                     .nickName(request.getNickName())
+                                                     .build();
+        return new CommonResponse<>(
+                LoginDupNickNameResponse.builder()
+                                        .isAlreadyExistNickName(loginService.checkNickNameDuplicate(dto))
+                                        .build());
     }
 }

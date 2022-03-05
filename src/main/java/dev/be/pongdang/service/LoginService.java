@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import dev.be.pongdang.common.utils.PasswordUtil;
 import dev.be.pongdang.domain.login.LoginDTO;
+import dev.be.pongdang.domain.login.LoginDupNickNameDTO;
 import dev.be.pongdang.domain.member.MemberDTO;
 import dev.be.pongdang.entity.Member;
 import dev.be.pongdang.repository.MemberRepository;
@@ -42,7 +43,15 @@ public class LoginService {
                        .isLogin(true)
                        .mid(member.getMid())
                        .build();
+    }
 
+    public boolean checkNickNameDuplicate(LoginDupNickNameDTO dto) {
+        Optional<Member> memberOtp = memberRepository.findByNickName(dto.getNickName());
+
+        if (memberOtp.isPresent()) {
+            return true;
+        }
+        return false;
     }
 
 }
