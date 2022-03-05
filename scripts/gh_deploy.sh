@@ -1,5 +1,5 @@
 #!/bin/bash
-PROJECT_NAME="github_action"
+PROJECT_NAME="pongdang"
 JAR_PATH="/home/ubuntu/github_action/build/libs/*.jar"
 DEPLOY_PATH=/home/ubuntu/$PROJECT_NAME/
 DEPLOY_LOG_PATH="/home/ubuntu/$PROJECT_NAME/application.log"
