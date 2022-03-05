@@ -66,17 +66,14 @@ public class PondService {
         });
 
         List<Diary> diaryEntityList = pond.getDiaryList();
-
         List<Diarys> diaryList = new ArrayList<>();
-
         diaryEntityList.stream().forEach(i -> {
-
             diaryList.add(Diarys.builder()
+                                .diaryId(i.getId())
                                 .mood(i.getMood())
                                 .content(i.getContent())
                                 .writerMid(i.getMember().getMid())
-                                .createdDate(
-                                        i.getCreatedDate().format(DateTimeFormatter.ofPattern("yyyy.MM.dd")))
+                                .createdDate(i.getCreatedDate().format(DateTimeFormatter.ofPattern("yyyy.MM.dd")))
                                 .build());
         });
 
