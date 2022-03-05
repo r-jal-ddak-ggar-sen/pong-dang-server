@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.be.pongdang.common.response.CommonResponse;
+import dev.be.pongdang.domain.pond.PondCreateDTO;
 import dev.be.pongdang.domain.pond.PondCreateResult.PondRequest;
+import dev.be.pongdang.domain.pond.PondCreateResult.PondResponse;
 import dev.be.pongdang.domain.pond.PondDTO;
 import dev.be.pongdang.domain.pond.PondSearchDTO;
 import dev.be.pongdang.domain.pond.PondSearchResult.Ponds;
@@ -36,8 +38,11 @@ public class PondController {
                                  .friendList(request.getFriendList())
                                  .backgroundUrl(request.getBackgroundUrl())
                                  .build();
-        pondService.createPond(pondDTO);
-        return CommonResponse.Success();
+        PondCreateDTO pondCreateDTO = pondService.createPond(pondDTO);
+
+        return new CommonResponse<>(PondResponse.builder()
+                                                .pondId(pondCreateDTO.getPondId())
+                                                .build());
     }
 
     @Operation(summary = "본인의 연못 리스트 조회")

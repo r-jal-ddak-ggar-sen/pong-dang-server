@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import dev.be.pongdang.domain.pond.PondCreateDTO;
 import dev.be.pongdang.domain.pond.PondDTO;
 import dev.be.pongdang.domain.pond.PondSearchDTO;
 import dev.be.pongdang.domain.pond.PondSearchResult.Ponds;
@@ -47,7 +48,7 @@ public class PondService {
         return pondsList;
     }
 
-    public void createPond(PondDTO pondDTO) {
+    public PondCreateDTO createPond(PondDTO pondDTO) {
         String makerMid = pondDTO.getMid();
         Member makerMember = memberService.getMember(makerMid);
 
@@ -69,6 +70,9 @@ public class PondService {
                                                  .build();
             memberPondRepository.save(newMemberPond);
         });
+        return PondCreateDTO.builder()
+                            .pondId(pond.getId())
+                            .build();
     }
 
 }

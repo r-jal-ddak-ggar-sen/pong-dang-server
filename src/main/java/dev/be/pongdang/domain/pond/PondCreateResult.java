@@ -29,5 +29,6 @@ public class PondCreateResult {
     @Getter
     @JsonInclude(Include.NON_NULL)
     public static class PondResponse {
+        private Long pondId;
     }
 }

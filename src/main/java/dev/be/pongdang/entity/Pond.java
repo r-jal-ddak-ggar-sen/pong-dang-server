@@ -38,4 +38,7 @@ public class Pond extends BaseEntity {
     @JoinColumn(name = "maker_member")
     private Member makerMember;
 
+    @OneToMany(mappedBy = "pondList")
+    private List<Diary> diaryList = new ArrayList<>();
+
 }
