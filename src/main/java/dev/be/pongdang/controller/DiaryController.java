@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.be.pongdang.common.response.CommonResponse;
@@ -40,10 +41,11 @@ public class DiaryController {
 
     @Operation(summary = "일기 조회")
     @GetMapping
-    public CommonResponse getDiary(@RequestBody DiaryReadRequest request) {
+    public CommonResponse getDiary(@RequestParam(name = "mid") String mid,
+                                   @RequestParam(name = "diary_id") Long diaryId) {
         DiaryReadDTO dto = DiaryReadDTO.builder()
-                                       .diaryId(request.getDiaryId())
-                                       .mid(request.getMid())
+                                       .mid(mid)
+                                       .diaryId(diaryId)
                                        .build();
         DiaryReadResponse response = diaryService.readDiary(dto);
         return new CommonResponse(response);

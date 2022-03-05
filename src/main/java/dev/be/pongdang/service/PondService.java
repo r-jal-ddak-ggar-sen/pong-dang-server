@@ -57,10 +57,6 @@ public class PondService {
     }
 
     public PondSearchDiaryResponse searchDiaryListInPond(PondSearchDiaryDTO dto) {
-        List<Ponds> pondsList = new ArrayList<>();
-
-        Member member = memberService.getMember(dto.getMid());
-
         Pond pond = pondRepository.findById(dto.getPondId()).orElseThrow(() -> {
             throw new CustomException(ReturnCode.NOT_EXIST, "요청한 연못이 존재하지 않습니다.");
         });
