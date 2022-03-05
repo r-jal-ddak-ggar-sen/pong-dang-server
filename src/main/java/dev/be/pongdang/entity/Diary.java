@@ -1,44 +1,48 @@
 package dev.be.pongdang.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
+import dev.be.pongdang.common.enums.MoodEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Builder(toBuilder = true)
+@Builder
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Pond extends BaseEntity {
+public class Diary extends BaseEntity {
 
     @Id
-    @Column(name = "pond_id")
+    @Column(name = "diary_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String title;
+    @Enumerated(EnumType.STRING)
+    private MoodEnum mood;
 
-    private String backgroundUrl;
+    private String content;
+
+    @OneToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "maker_member")
-    private Member makerMember;
-
-    @OneToMany(mappedBy = "pond")
-    private List<Diary> diaryList = new ArrayList<>();
+    @JoinColumn(name = "pond_id")
+    private Pond pond;
 
 }

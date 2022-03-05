@@ -37,6 +37,7 @@ public class PondService {
         myPondList.stream().forEach(i -> {
             int pondMemerCount = memberPondRepository.findByPond(i).size();
             Ponds ponds = Ponds.builder()
+                               .pondId(i.getId())
                                .title(i.getTitle())
                                .ownerMemberNickName(i.getMakerMember().getNickName())
                                .memberCount(pondMemerCount)

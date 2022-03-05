@@ -40,5 +40,4 @@ public class Member extends BaseEntity {
 
     @OneToMany(mappedBy = "makerMember")
     private List<Pond> makePondList = new ArrayList<>();
-
 }

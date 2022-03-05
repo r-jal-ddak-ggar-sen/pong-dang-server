@@ -1,6 +1,7 @@
 package dev.be.pongdang.service;
 
 import java.util.Optional;
+import java.util.Random;
 
 import org.springframework.stereotype.Service;
 
@@ -36,7 +37,7 @@ public class MemberService {
         validateExistNickName(memberDTO.getNickName());
 
         Member newMember = Member.builder()
-                                 .mid(passwordUtil.getEncodedValue(memberDTO.getNickName()).substring(1, 31))
+                                 .mid(getMid())
                                  .nickName(memberDTO.getNickName())
                                  .password(passwordUtil.getEncodedValue(memberDTO.getPassword()))
                                  .build();
@@ -49,6 +50,19 @@ public class MemberService {
                         .ifPresent(i -> {
                             throw new CustomException(ReturnCode.EXIST_NICKNAME);
                         });
+    }
+
+    private String getMid() {
+        int leftLimit = 48; // numeral '0'
+        int rightLimit = 122; // letter 'z'
+        int targetStringLength = 30;
+        Random random = new Random();
+
+        return random.ints(leftLimit, rightLimit + 1)
+                     .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+                     .limit(targetStringLength)
+                     .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                     .toString();
     }
 
 }

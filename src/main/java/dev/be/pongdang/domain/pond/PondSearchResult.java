@@ -38,6 +38,7 @@ public class PondSearchResult {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class Ponds {
+        private Long pondId;
         private String title;
         private String backgroundUrl;
         private int memberCount;
