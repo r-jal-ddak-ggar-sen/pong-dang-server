@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import dev.be.pongdang.common.response.CommonResponse;
 import dev.be.pongdang.domain.Diary.DiaryReadDTO;
-import dev.be.pongdang.domain.Diary.DiaryReadResult.DiaryReadRequest;
 import dev.be.pongdang.domain.Diary.DiaryReadResult.DiaryReadResponse;
 import dev.be.pongdang.domain.Diary.DiaryWriteDTO;
 import dev.be.pongdang.domain.Diary.DiaryWriteResult.DiaryWriteRequest;

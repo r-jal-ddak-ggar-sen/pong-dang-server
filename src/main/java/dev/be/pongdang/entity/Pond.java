@@ -41,4 +41,8 @@ public class Pond extends BaseEntity {
     @OneToMany(mappedBy = "pond")
     private List<Diary> diaryList = new ArrayList<>();
 
+    public void addMember(Member member) {
+        member.getMakePondList().add(this);
+    }
+
 }
