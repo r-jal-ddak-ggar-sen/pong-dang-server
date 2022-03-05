@@ -24,5 +24,6 @@ public class LoginResult {
     @Getter
     public static class LoginResponse {
         private boolean isLogin;
+        private String mid;
     }
 }

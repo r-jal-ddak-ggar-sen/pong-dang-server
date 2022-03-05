@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import dev.be.pongdang.common.utils.PasswordUtil;
+import dev.be.pongdang.domain.login.LoginDTO;
 import dev.be.pongdang.domain.member.MemberDTO;
 import dev.be.pongdang.entity.Member;
 import dev.be.pongdang.repository.MemberRepository;
@@ -17,16 +18,30 @@ public class LoginService {
     private final PasswordUtil passwordUtil;
     private final MemberRepository memberRepository;
 
-    public boolean login(MemberDTO memberDTO) {
+    public LoginDTO login(MemberDTO memberDTO) {
 
         Optional<Member> memberOpt = memberRepository.findByNickName(memberDTO.getNickName());
 
         if (!memberOpt.isPresent()) {
-            return false;
+            return LoginDTO.builder()
+                           .isLogin(false)
+                           .build();
         }
 
         Member member = memberOpt.get();
-        return passwordUtil.isPwEquals(memberDTO.getPassword(), member.getPassword());
+
+        boolean isSameUser = passwordUtil.isPwEquals(memberDTO.getPassword(), member.getPassword());
+
+        if (isSameUser == false) {
+            return LoginDTO.builder()
+                           .isLogin(false)
+                           .build();
+        }
+
+        return LoginDTO.builder()
+                       .isLogin(true)
+                       .mid(member.getMid())
+                       .build();
 
     }
 

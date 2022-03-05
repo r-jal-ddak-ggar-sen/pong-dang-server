@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.be.pongdang.common.response.CommonResponse;
+import dev.be.pongdang.domain.login.LoginDTO;
 import dev.be.pongdang.domain.login.LoginResult.LoginResponse;
 import dev.be.pongdang.domain.login.LoginResult.MemberRequest;
 import dev.be.pongdang.domain.member.MemberDTO;
@@ -29,13 +30,14 @@ public class LoginController {
                                        .nickName(request.getNickName())
                                        .password(request.getPassword())
                                        .build();
-        boolean isLogin = loginService.login(memberDTO);
-        return new CommonResponse<>(getLoginResponse(isLogin));
+        LoginDTO loginDTO = loginService.login(memberDTO);
+        return new CommonResponse<>(getLoginResponse(loginDTO));
     }
 
-    private LoginResponse getLoginResponse(boolean isLogin) {
+    private LoginResponse getLoginResponse(LoginDTO loginDTO) {
         return LoginResponse.builder()
-                            .isLogin(isLogin)
+                            .isLogin(loginDTO.isLogin())
+                            .mid(loginDTO.getMid())
                             .build();
     }
 }
