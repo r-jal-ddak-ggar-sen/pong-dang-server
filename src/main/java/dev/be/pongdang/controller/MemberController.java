@@ -34,7 +34,7 @@ public class MemberController {
     }
 
     @Operation(summary = "Member 생성")
-    @PostMapping("/signup")
+    @PostMapping
     public CommonResponse createMember(@RequestBody MemberRequest request) {
         MemberDTO memberDTO = MemberDTO.builder()
                                        .nickName(request.getNickName())
