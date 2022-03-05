@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import dev.be.pongdang.common.enums.response.ReturnCode;
 import dev.be.pongdang.common.response.CommonResponse;
 import dev.be.pongdang.domain.login.LoginDTO;
 import dev.be.pongdang.domain.login.LoginResult.LoginResponse;
@@ -31,7 +32,12 @@ public class LoginController {
                                        .password(request.getPassword())
                                        .build();
         LoginDTO loginDTO = loginService.login(memberDTO);
-        return new CommonResponse<>(getLoginResponse(loginDTO));
+        LoginResponse loginResponse = getLoginResponse(loginDTO);
+
+        if (loginResponse.isLogin() == false) {
+            return new CommonResponse<>(ReturnCode.LOGIN_FAIL, loginResponse);
+        }
+        return new CommonResponse<>(loginResponse);
     }
 
     private LoginResponse getLoginResponse(LoginDTO loginDTO) {

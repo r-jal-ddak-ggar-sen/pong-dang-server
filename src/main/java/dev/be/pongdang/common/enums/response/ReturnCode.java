@@ -11,6 +11,7 @@ public enum ReturnCode implements CodeEnum, TextEnum, ReturnEnum {
 
     NOT_EXIST("4000", "Not Exist"),
     EXIST_NICKNAME("4001", "Already Exist NickName"),
+    LOGIN_FAIL("4002", "Login Failed"),
 
     UNKNOWN_ERROR("9999", "Unable to process your request. Please try again later.");
 
