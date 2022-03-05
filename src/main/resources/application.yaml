@@ -16,3 +16,10 @@ spring:
     url: jdbc:mysql://${rds.hostname}:${rds.port}/${rds.dbname}?characterEncoding=utf8
     username: ${rds.username}
     password: ${rds.password}
+
+springdoc:
+  api-docs:
+    path: '/api-docs'
+
+  swagger-ui:
+    path: '/swagger.html'
