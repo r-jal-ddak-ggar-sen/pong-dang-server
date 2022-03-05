@@ -40,7 +40,7 @@ public class CommonResponse<T> {
         setReturnMessage(returnEnum.getReturnMessage());
     }
 
-    public static CommonResponse success() {
+    public static CommonResponse Success() {
         return builder()
                 .returnCode(ReturnCode.SUCCESS.getReturnCode())
                 .returnMessage(ReturnCode.SUCCESS.getReturnMessage())

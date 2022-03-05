@@ -13,7 +13,6 @@ import dev.be.pongdang.common.response.CommonResponse;
 import dev.be.pongdang.domain.pond.PondCreateResult.PondRequest;
 import dev.be.pongdang.domain.pond.PondDTO;
 import dev.be.pongdang.domain.pond.PondSearchDTO;
-import dev.be.pongdang.domain.pond.PondSearchResult.PondSearchRequest;
 import dev.be.pongdang.domain.pond.PondSearchResult.Ponds;
 import dev.be.pongdang.service.PondService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -38,7 +37,7 @@ public class PondController {
                                  .backgroundUrl(request.getBackgroundUrl())
                                  .build();
         pondService.createPond(pondDTO);
-        return CommonResponse.success();
+        return CommonResponse.Success();
     }
 
     @Operation(summary = "본인의 연못 리스트 조회")

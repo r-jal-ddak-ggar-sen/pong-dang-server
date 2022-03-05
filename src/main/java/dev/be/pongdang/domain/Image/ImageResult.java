@@ -1,4 +1,4 @@
-package dev.be.pongdang.domain.image;
+package dev.be.pongdang.domain.Image;
 
 import java.util.List;
 

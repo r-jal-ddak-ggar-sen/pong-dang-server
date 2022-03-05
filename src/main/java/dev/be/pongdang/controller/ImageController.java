@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.be.pongdang.common.response.CommonResponse;
-import dev.be.pongdang.domain.image.ImageDTO;
-import dev.be.pongdang.domain.image.ImageResult.MemberResponse;
+import dev.be.pongdang.domain.Image.ImageDTO;
+import dev.be.pongdang.domain.Image.ImageResult.MemberResponse;
 import dev.be.pongdang.service.ImageService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;

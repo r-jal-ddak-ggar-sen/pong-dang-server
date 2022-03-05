@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import dev.be.pongdang.domain.image.ImageDTO;
+import dev.be.pongdang.domain.Image.ImageDTO;
 import dev.be.pongdang.repository.ImageRepository;
 import lombok.RequiredArgsConstructor;
 
