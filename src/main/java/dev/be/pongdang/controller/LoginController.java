@@ -35,9 +35,13 @@ public class LoginController {
     }
 
     private LoginResponse getLoginResponse(LoginDTO loginDTO) {
-        return LoginResponse.builder()
-                            .isLogin(loginDTO.isLogin())
-                            .mid(loginDTO.getMid())
-                            .build();
+        LoginResponse loginResponse = LoginResponse.builder()
+                                                   .isLogin(loginDTO.isLogin())
+                                                   .build();
+        if (loginDTO.isLogin()) {
+            loginResponse.setMid(loginDTO.getMid());
+        }
+
+        return loginResponse;
     }
 }

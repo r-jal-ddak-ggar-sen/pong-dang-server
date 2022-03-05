@@ -36,7 +36,7 @@ public class MemberService {
         validateExistNickName(memberDTO.getNickName());
 
         Member newMember = Member.builder()
-                                 .mid(passwordUtil.getEncodedValue(memberDTO.getNickName()).substring(0, 30))
+                                 .mid(passwordUtil.getEncodedValue(memberDTO.getNickName()).substring(1, 31))
                                  .nickName(memberDTO.getNickName())
                                  .password(passwordUtil.getEncodedValue(memberDTO.getPassword()))
                                  .build();
