@@ -16,6 +16,23 @@ spring:
     url: jdbc:mysql://${rds.hostname}:${rds.port}/${rds.dbname}?characterEncoding=utf8
     username: ${rds.username}
     password: ${rds.password}
+  mail:
+    host: smtp.gmail.com
+    port: 465
+    username: 'hello.goodgid@gmail.com'
+    password: 'txshmujsjoehufuf' # src/main/resources의 PW1, PW2 이미지 참고
+    properties:
+      mail:
+        smtp:
+          auth: true
+          ssl:
+            enable: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+        smtps:
+          checkserveridentity: true
+          trust: '*'
 
 springdoc:
   api-docs:

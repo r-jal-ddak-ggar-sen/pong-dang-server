@@ -38,6 +38,9 @@ dependencies {
 
     // for SpringDoc
     implementation "org.springdoc:springdoc-openapi-ui:${springDocVersion}"
+
+    // for mail(SMTP)
+    implementation 'org.springframework.boot:spring-boot-starter-mail:2.6.2'
 }
 
 tasks.named('test') {

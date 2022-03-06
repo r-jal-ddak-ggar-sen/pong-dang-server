@@ -31,6 +31,7 @@ public class PondService {
     private final MemberService memberService;
     private final MemberPondRepository memberPondRepository;
     private final PondRepository pondRepository;
+    private final MailService mailService;
 
     public List<Ponds> searchMyPondList(PondSearchDTO pondSearchDTO) {
         List<Ponds> pondsList = new ArrayList<>();
@@ -100,6 +101,8 @@ public class PondService {
                                                  .build();
             memberPondRepository.save(newMemberPond);
         });
+
+        mailService.sendMail();
         return PondCreateDTO.builder()
                             .pondId(pond.getId())
                             .build();
