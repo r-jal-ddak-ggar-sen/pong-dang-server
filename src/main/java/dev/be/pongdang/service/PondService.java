@@ -84,7 +84,7 @@ public class PondService {
 
         List<String> friendList = pondDTO.getFriendList();
         List<Member> memberList = new ArrayList<>();
-        friendList.stream().forEach(i -> memberList.add(memberService.getMember(i)));
+        friendList.stream().forEach(i -> memberList.add(memberService.getMemberByNickName(i)));
 
         Pond pond = Pond.builder()
                         .title(pondDTO.getTitle())

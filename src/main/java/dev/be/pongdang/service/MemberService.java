@@ -26,6 +26,12 @@ public class MemberService {
         return memberOpt.get();
     }
 
+    public Member getMemberByNickName(String nickName) {
+        Optional<Member> memberOpt = memberRepository.findByNickName(nickName);
+        validateExistMember(memberOpt);
+        return memberOpt.get();
+    }
+
     private void validateExistMember(Optional<Member> memberOpt) {
         if (memberOpt.isPresent()) {
             return;
